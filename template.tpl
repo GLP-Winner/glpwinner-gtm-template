@@ -114,7 +114,7 @@ ___TEMPLATE_PARAMETERS___
             "name": "userEmail",
             "displayName": "User Email (Optional)",
             "simpleValueType": true,
-            "help": "If user's email is known at initialization"
+            "help": "If user\u0027s email is known at initialization"
           },
           {
             "type": "CHECKBOX",
@@ -244,7 +244,7 @@ ___TEMPLATE_PARAMETERS___
         "name": "leadStep",
         "displayName": "Lead Step (Optional)",
         "simpleValueType": true,
-        "help": "Step or stage of the lead journey (e.g., 'signup', 'demo-request', 'trial', 'pricing-viewed')"
+        "help": "Step or stage of the lead journey (e.g., \u0027signup\u0027, \u0027demo-request\u0027, \u0027trial\u0027, \u0027pricing-viewed\u0027)"
       },
       {
         "type": "TEXT",
@@ -276,6 +276,7 @@ ___TEMPLATE_PARAMETERS___
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 // Load necessary APIs
+const JSON = require('JSON');
 const injectScript = require('injectScript');
 const copyFromWindow = require('copyFromWindow');
 const setInWindow = require('setInWindow');
@@ -361,21 +362,15 @@ function buildLeadData() {
   if (data.leadSource) leadData.source = data.leadSource;
   
   // Add any custom fields
-  if (data.leadCustomFields) {
-    try {
-      // Parse JSON string
-      const customFields = JSON.parse(data.leadCustomFields);
-      // Merge custom fields into lead data
-      for (const key in customFields) {
-        if (customFields.hasOwnProperty(key)) {
-          leadData[key] = customFields[key];
-        }
-      }
-    } catch (e) {
-      log('GLP Winner: Error parsing custom fields JSON:', e);
+if (data.leadCustomFields) {
+  const customFields = JSON.parse(data.leadCustomFields);
+  // Merge custom fields into lead data
+  for (const key in customFields) {
+    if (customFields.hasOwnProperty(key)) {
+      leadData[key] = customFields[key];
     }
   }
-  
+}
   return leadData;
 }
 
@@ -413,7 +408,7 @@ function trackLead() {
     log('GLP Winner - Debug: Logging lead with data:', leadData, 'and step:', leadStep);
     
     // Call trackLead with proper parameters based on what's available
-    const hasData = Object.keys(leadData).length > 0;
+const hasData = !!(leadData.email || leadData.name || leadData.phone || leadData.lead_id || leadData.source);
     
     if (hasData && leadStep) {
       // Both data and step
@@ -465,7 +460,15 @@ function processQueue() {
         if (cmd.callback) cmd.callback();
       } else if (cmd.type === 'lead' && glp.trackLead) {
         // Handle lead tracking with both data and step parameters
-        const hasData = cmd.data && Object.keys(cmd.data).length > 0;
+    let hasData = false;
+if (cmd.data) {
+  for (const key in cmd.data) {
+    if (cmd.data.hasOwnProperty(key)) {
+      hasData = true;
+      break;
+    }
+  }
+}
         
         if (hasData && cmd.step) {
           // Both data and step
@@ -851,6 +854,9 @@ ___WEB_PERMISSIONS___
         }
       ]
     },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
     "isRequired": true
   }
 ]
@@ -933,3 +939,5 @@ Create a tag with "Track Lead" type:
 - `pricing-viewed` - Viewed pricing page
 - `contact-form` - Submitted contact form
 - `webinar-registered` - Registered for a webinar
+
+
