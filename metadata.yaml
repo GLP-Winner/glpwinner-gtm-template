@@ -15,5 +15,5 @@
 homepage: "https://www.glpwinner.com"
 documentation: "https://www.glpwinner.com/tech-docs"
 versions:
-  - sha: 34cd3a56d9d58021e5cb69403681c37f4e8850b9
+  - sha: 2ae74471d16909cc663cc9fdc57c6e97ac46d025
     changeNotes: GLP Winner Affiliate Tracking template for Google Tag Manager. Supports automatic initialization on affiliate traffic and conversion tracking.
