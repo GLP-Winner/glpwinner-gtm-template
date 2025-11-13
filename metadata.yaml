@@ -16,7 +16,7 @@ homepage: "https://www.glpwinner.com"
 documentation: "https://www.glpwinner.com/tech-docs"
 versions:
   # Latest version
-  - sha: 528f3dc03d68ea18540ad322de447408a9f0ea13
+  - sha: b2112db78d19e111d7b50921b068eb4235ac2e8d
     changeNotes: |2
       Relocate Terms of Service section to meet Google Tag Manager gallery validator requirements.
       Maintain links to updated Terms of Service and Privacy Policy pages.
