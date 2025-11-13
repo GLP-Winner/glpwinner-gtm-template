@@ -15,5 +15,12 @@
 homepage: "https://www.glpwinner.com"
 documentation: "https://www.glpwinner.com/tech-docs"
 versions:
+  # Latest version
   - sha: 2ae74471d16909cc663cc9fdc57c6e97ac46d025
+    changeNotes: |2
+      Add lead event tracking for affiliate conversions.
+      Improve automatic initialization for lead-focused pages.
+      Update documentation references for lead events.
+  # Older versions
+  - sha: 34cd3a56d9d58021e5cb69403681c37f4e8850b9
     changeNotes: GLP Winner Affiliate Tracking template for Google Tag Manager. Supports automatic initialization on affiliate traffic and conversion tracking.
