@@ -16,11 +16,15 @@ homepage: "https://www.glpwinner.com"
 documentation: "https://www.glpwinner.com/tech-docs"
 versions:
   # Latest version
+  - sha: 528f3dc03d68ea18540ad322de447408a9f0ea13
+    changeNotes: |2
+      Relocate Terms of Service section to meet Google Tag Manager gallery validator requirements.
+      Maintain links to updated Terms of Service and Privacy Policy pages.
+  # Older versions
   - sha: 4e991c7b3739a0c92470b10d4d7d4b2c565aebad
     changeNotes: |2
       Update Terms of Service and Privacy Policy URLs in the template.
       Ensure compliance with Google Tag Manager gallery submission requirements.
-  # Older versions
   - sha: 2ae74471d16909cc663cc9fdc57c6e97ac46d025
     changeNotes: |2
       Add lead event tracking for affiliate conversions.
