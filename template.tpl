@@ -941,3 +941,9 @@ Create a tag with "Track Lead" type:
 - `webinar-registered` - Registered for a webinar
 
 
+___TERMS_OF_SERVICE___
+
+{
+  "termsOfServiceUrl": "https://www.glpwinner.com/terms-of-service",
+  "privacyPolicyUrl": "https://www.glpwinner.com/privacy-policy"
+}
