@@ -867,6 +867,14 @@ ___TESTS___
 scenarios: []
 
 
+___TERMS_OF_SERVICE___
+
+{
+  "termsOfServiceUrl": "https://www.glpwinner.com/terms-of-service",
+  "privacyPolicyUrl": "https://www.glpwinner.com/privacy-policy"
+}
+
+
 ___NOTES___
 
 Created on 5/26/2025
@@ -939,11 +947,3 @@ Create a tag with "Track Lead" type:
 - `pricing-viewed` - Viewed pricing page
 - `contact-form` - Submitted contact form
 - `webinar-registered` - Registered for a webinar
-
-
-___TERMS_OF_SERVICE___
-
-{
-  "termsOfServiceUrl": "https://www.glpwinner.com/terms-of-service",
-  "privacyPolicyUrl": "https://www.glpwinner.com/privacy-policy"
-}
