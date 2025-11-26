@@ -79,13 +79,17 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "valueValidators": [
           {
-            "type": "NON_EMPTY"
-          },
-          {
-            "type": "POSITIVE_NUMBER"
+            "type": "POSITIVE_NUMBER",
+            "enablingConditions": [
+              {
+                "paramName": "providerId",
+                "paramValue": "",
+                "type": "NOT_EQUALS"
+              }
+            ]
           }
         ],
-        "help": "Your numeric Provider ID from GLP Winner",
+        "help": "Provider ID: Your unique GLP Winner provider identifier.\n- Leave empty if your domain is registered for automatic detection.\n- Auto-resolve Provider:\n[Enabled] Leave blank to let the SDK resolve from the current domain (no Provider ID needed).\n[Disabled] Enter a numeric Provider ID to target a specific provider or domain override.\nContact benson@glpwinner.com if unsure.",
         "alwaysInSummary": true
       },
       {
@@ -318,9 +322,12 @@ function hasGlpClickId() {
 
 // Function to build configuration object
 function buildConfig() {
-  const config = {
-    providerId: makeNumber(data.providerId)
-  };
+  const config = {};
+
+  // Only set providerId when provided to allow server-side domain resolution
+  if (data.providerId && data.providerId !== '') {
+    config.providerId = makeNumber(data.providerId);
+  }
   
   // Add optional settings
   if (data.testMode !== undefined) config.testMode = data.testMode;
