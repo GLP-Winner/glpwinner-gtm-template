@@ -15,16 +15,20 @@
 homepage: "https://www.glpwinner.com"
 documentation: "https://www.glpwinner.com/tech-docs"
 versions:
+  # Latest version
+  - sha: 8014dc02b9365e3b9fb61e0221545c0b1ee44322
+    changeNotes: |2
+      Shorten the Provider ID tooltip to focus on automatic detection guidance.
+      Keep contact instructions while stripping redundant bullet points for clarity.
   - sha: 47bf4e2f8706ea690be787c896ef0a54c72b7318
     changeNotes: |2
       Make providerId optional with auto-resolve guidance so GLP Winner can detect providers from domain mapping when the field is left blank.
       Refresh template help text to explain when to supply a numeric Provider ID and how the auto-resolve toggle behaves.
-  # Latest version
+  # Older versions
   - sha: b2112db78d19e111d7b50921b068eb4235ac2e8d
     changeNotes: |2
       Relocate Terms of Service section to meet Google Tag Manager gallery validator requirements.
       Maintain links to updated Terms of Service and Privacy Policy pages.
-  # Older versions
   - sha: 4e991c7b3739a0c92470b10d4d7d4b2c565aebad
     changeNotes: |2
       Update Terms of Service and Privacy Policy URLs in the template.
