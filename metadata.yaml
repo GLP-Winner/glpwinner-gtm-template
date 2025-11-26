@@ -15,6 +15,10 @@
 homepage: "https://www.glpwinner.com"
 documentation: "https://www.glpwinner.com/tech-docs"
 versions:
+  - sha: 47bf4e2f8706ea690be787c896ef0a54c72b7318
+    changeNotes: |2
+      Make providerId optional with auto-resolve guidance so GLP Winner can detect providers from domain mapping when the field is left blank.
+      Refresh template help text to explain when to supply a numeric Provider ID and how the auto-resolve toggle behaves.
   # Latest version
   - sha: b2112db78d19e111d7b50921b068eb4235ac2e8d
     changeNotes: |2
