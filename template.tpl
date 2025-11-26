@@ -89,7 +89,7 @@ ___TEMPLATE_PARAMETERS___
             ]
           }
         ],
-        "help": "Provider ID: Your unique GLP Winner provider identifier.\n- Leave empty if your domain is registered for automatic detection.\n- Auto-resolve Provider:\n[Enabled] Leave blank to let the SDK resolve from the current domain (no Provider ID needed).\n[Disabled] Enter a numeric Provider ID to target a specific provider or domain override.\nContact benson@glpwinner.com if unsure.",
+        "help": "Leave empty if your domain is registered for automatic detection. Contact benson@glpwinner.com if unsure.",
         "alwaysInSummary": true
       },
       {
