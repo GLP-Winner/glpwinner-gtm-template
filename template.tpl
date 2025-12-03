@@ -233,45 +233,10 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "TEXT",
-        "name": "leadName",
-        "displayName": "Lead Name (Optional)",
-        "simpleValueType": true,
-        "help": "Full name of the lead"
-      },
-      {
-        "type": "TEXT",
-        "name": "leadPhone",
-        "displayName": "Lead Phone (Optional)",
-        "simpleValueType": true,
-        "help": "Phone number of the lead"
-      },
-      {
-        "type": "TEXT",
-        "name": "leadId",
-        "displayName": "Lead ID (Optional)",
-        "simpleValueType": true,
-        "help": "Your internal lead ID for tracking"
-      },
-      {
-        "type": "TEXT",
-        "name": "leadSource",
-        "displayName": "Lead Source (Optional)",
-        "simpleValueType": true,
-        "help": "Source of the lead (e.g., form name, campaign)"
-      },
-      {
-        "type": "TEXT",
         "name": "leadStep",
         "displayName": "Lead Step (Optional)",
         "simpleValueType": true,
         "help": "Step or stage of the lead journey (e.g., \u0027signup\u0027, \u0027demo-request\u0027, \u0027trial\u0027, \u0027pricing-viewed\u0027)"
-      },
-      {
-        "type": "TEXT",
-        "name": "leadCustomFields",
-        "displayName": "Custom Fields (JSON)",
-        "simpleValueType": true,
-        "help": "Additional custom fields as JSON object, e.g., {\"company\":\"Example Corp\",\"interest\":\"Product A\"}"
       }
     ],
     "enablingConditions": [
@@ -296,7 +261,6 @@ ___TEMPLATE_PARAMETERS___
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 // Load necessary APIs
-const JSON = require('JSON');
 const injectScript = require('injectScript');
 const copyFromWindow = require('copyFromWindow');
 const setInWindow = require('setInWindow');
@@ -376,24 +340,7 @@ function buildConversionData() {
 // Function to build lead data object
 function buildLeadData() {
   const leadData = {};
-  
-  // Add optional lead data
   if (data.leadEmail) leadData.email = data.leadEmail;
-  if (data.leadName) leadData.name = data.leadName;
-  if (data.leadPhone) leadData.phone = data.leadPhone;
-  if (data.leadId) leadData.lead_id = data.leadId;
-  if (data.leadSource) leadData.source = data.leadSource;
-  
-  // Add any custom fields
-if (data.leadCustomFields) {
-  const customFields = JSON.parse(data.leadCustomFields);
-  // Merge custom fields into lead data
-  for (const key in customFields) {
-    if (customFields.hasOwnProperty(key)) {
-      leadData[key] = customFields[key];
-    }
-  }
-}
   return leadData;
 }
 
@@ -431,7 +378,7 @@ function trackLead() {
     log('GLP Winner - Debug: Logging lead with data:', leadData, 'and step:', leadStep);
     
     // Call trackLead with proper parameters based on what's available
-const hasData = !!(leadData.email || leadData.name || leadData.phone || leadData.lead_id || leadData.source);
+    const hasData = !!leadData.email;
     
     if (hasData && leadStep) {
       // Both data and step
@@ -483,15 +430,7 @@ function processQueue() {
         if (cmd.callback) cmd.callback();
       } else if (cmd.type === 'lead' && glp.trackLead) {
         // Handle lead tracking with both data and step parameters
-    let hasData = false;
-if (cmd.data) {
-  for (const key in cmd.data) {
-    if (cmd.data.hasOwnProperty(key)) {
-      hasData = true;
-      break;
-    }
-  }
-}
+        const hasData = !!(cmd.data && cmd.data.email);
         
         if (hasData && cmd.step) {
           // Both data and step
@@ -909,7 +848,7 @@ This template provides easy integration with GLP Winner's affiliate tracking sys
 ## Features:
 - Initialize GLP SDK with your Provider ID (only when glp_click_id is present in URL)
 - Track conversions with optional data
-- Track leads with comprehensive lead data capture including lead steps
+- Track leads with streamlined email + lead step capture
 - Automatic script loading
 - Queue support for asynchronous loading
 - Test mode support
@@ -936,32 +875,12 @@ Create a tag with "Track Lead" type:
 - Set to fire on lead capture events (form submissions, newsletter signups, etc.)
 - Optionally provide:
   - Email address
-  - Name
-  - Phone number
-  - Internal lead ID
-  - Lead source
   - Lead step (e.g., 'signup', 'demo-request', 'trial')
-  - Custom fields (as JSON)
 - Useful for tracking mid-funnel conversions before final purchase
 
 ## Lead Tracking Fields:
 - **Email**: Lead's email address
-- **Name**: Lead's full name
-- **Phone**: Lead's phone number
-- **Lead ID**: Your internal ID for the lead
-- **Source**: Where the lead came from (e.g., "contact-form", "newsletter")
 - **Lead Step**: The stage in the lead journey (e.g., "signup", "demo-request", "trial", "pricing-viewed")
-- **Custom Fields**: Additional data as JSON, e.g., `{"company":"ACME Corp","budget":"$10k-50k"}`
-
-## Example Custom Fields JSON:
-```json
-{
-  "company": "Example Corp",
-  "interest": "Product A",
-  "budget": "$5000-$10000",
-  "timeline": "Q1 2025"
-}
-```
 
 ## Lead Step Examples:
 - `signup` - Initial registration
