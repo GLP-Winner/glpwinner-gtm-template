@@ -16,6 +16,11 @@ homepage: "https://www.glpwinner.com"
 documentation: "https://www.glpwinner.com/tech-docs"
 versions:
   # Latest version
+  - sha: 5c22530f5c7abc64c5b5a8af552c2f6bfe830076
+    changeNotes: |2
+      Simplify lead tracking inputs to just leadEmail and leadStep to avoid misconfigured name fields.
+      Update buildLeadData, tracking logic, and queue replay to only expect an email payload.
+      Refresh template documentation to describe the streamlined lead capture flow.
   - sha: 8014dc02b9365e3b9fb61e0221545c0b1ee44322
     changeNotes: |2
       Shorten the Provider ID tooltip to focus on automatic detection guidance.
